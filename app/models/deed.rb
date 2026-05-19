@@ -4,5 +4,5 @@ class Deed < ApplicationRecord
   validates :title, presence: true
   validates :ai_verdict, presence: true, allow_nil: true
   validates :content, presence: true
-  validates :public, presence: true
+  validates :public, inclusion: { in: [true, false] }
 end
