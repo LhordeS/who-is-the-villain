@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @deeds = Deed.all
   end
 
   def leaderboard
