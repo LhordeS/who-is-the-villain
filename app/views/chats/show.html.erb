@@ -1,0 +1,31 @@
+<% deed = @chat.deed %>
+
+<h1>The Court is in Session: Verdict</h1>
+
+<h2>Your Confession</h2>
+<h3><%= deed.title %></h3>
+<p><em>"<%= deed.content %>"</em></p>
+
+<hr />
+
+<h2>The Judgment</h2>
+<ul>
+  <li>
+    <strong>Villain Score:</strong>
+    <%= deed.villain_score == -1 ? "FLAGGED" : "#{deed.villain_score}/100" %>
+  </li>
+  <li>
+    <strong>Moral Status (Verdict):</strong>
+    <%= deed.ai_verdict %>
+  </li>
+</ul>
+
+<h3>The Judge's Summary</h3>
+<p><%= deed.summary %></p>
+
+<hr />
+
+<nav>
+  <%= link_to "View All Chats", chats_path %> |
+  <%= link_to "New Confession", new_deed_path %>
+</nav>
