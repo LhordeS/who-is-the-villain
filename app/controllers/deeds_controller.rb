@@ -2,11 +2,12 @@ class DeedsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
   skip_before_action :authenticate_user!, only: :new
   skip_before_action :authenticate_user!, only: :create
+  skip_before_action :authenticate_user!, only: :show
   def index
   end
 
   def show
-    raise
+    @deed = Deed.find(params[:id])
   end
 
   def new
