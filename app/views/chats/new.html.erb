@@ -1,6 +1,9 @@
 <h1>Confess my child...</h1>
 <p>Are you a saint or a menace? Let the Judge decide your fate.</p>
 
+<h2><%= @deed.title %></h2>
+<p><em>"<%= @deed.content %>"</em></p>
+
 <%= form_with(model: Chat.new, url: chats_path, local: true) do |f| %>
   <%= f.hidden_field :deed_id, value: params[:deed_id] %>
 

@@ -1,11 +1,16 @@
 class ChatsController < ApplicationController
+  before_action :set_and_authorize_chat, only: [:show]
+
   def index
+    @chats = Chat.includes(:deed).where(deeds: { user_id: current_user.id }).order(created_at: :desc)
   end
 
   def show
   end
 
   def new
+      @deed = Deed.find(params[:deed_id])
+      @chat = Chat.new
   end
 
   def create
@@ -39,6 +44,13 @@ class ChatsController < ApplicationController
   end
 
   private
+
+  def set_and_authorize_chat
+    @chat = Chat.find(params[:id])
+    unless @chat.user == current_user
+      redirect_to chats_path, alert: "You are not authorized to view that chat."
+    end
+  end
 
   def chat_params
     params.require(:chat).permit(:deed_id, :user_id)
