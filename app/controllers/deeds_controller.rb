@@ -2,10 +2,12 @@ class DeedsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
   skip_before_action :authenticate_user!, only: :new
   skip_before_action :authenticate_user!, only: :create
+  skip_before_action :authenticate_user!, only: :show
   def index
   end
 
   def show
+    @deed = Deed.find(params[:id])
   end
 
   def new
@@ -13,12 +15,11 @@ class DeedsController < ApplicationController
   end
 
   def create
-    raise
     @deed = Deed.create(deed_params)
-    if @deed.save?
+    if @deed.save
       redirect_to deed_path
     else
-      render :new, status: unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
