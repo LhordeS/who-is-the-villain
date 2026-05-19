@@ -32,7 +32,7 @@ class ChatsController < ApplicationController
         content: clean
       )
 
-      redirect_to deed_chat_path(@deed, @chat)
+      redirect_to chat_path(@chat)
     else
       render :new, status: :unprocessable_entity
     end
