@@ -3,9 +3,12 @@ class ChatsController < ApplicationController
   end
 
   def show
+    @chat = Chat.find(params[:id])
+
   end
 
   def new
+    @deed = Deed.find(params[:deed_id])
   end
 
   def create

@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: "pages#dashboard"
   get 'leaderboard', to: "pages#leaderboard"
 
-  resources :deeds, except: [:destroy]
-  resources :chats, except: [:destroy] do
+  resources :deeds, except: [:destroy] do
     resources :messages, only: [:create]
   end
 
