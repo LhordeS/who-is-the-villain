@@ -1,8 +1,8 @@
 class DeedsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
-  skip_before_action :authenticate_user!, only: :new
-  skip_before_action :authenticate_user!, only: :create
-  skip_before_action :authenticate_user!, only: :show
+  # skip_before_action :authenticate_user!, only: :index
+  # skip_before_action :authenticate_user!, only: :new
+  # skip_before_action :authenticate_user!, only: :create
+  # skip_before_action :authenticate_user!, only: :show
   def index
   end
 
