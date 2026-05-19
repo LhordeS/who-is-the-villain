@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_19_080918) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_19_145721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,9 +19,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_080918) do
     t.text "content"
     t.datetime "created_at", null: false
     t.boolean "public", default: false
+    t.text "summary"
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.integer "villain_score"
     t.index ["user_id"], name: "index_deeds_on_user_id"
   end
 
