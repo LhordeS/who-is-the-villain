@@ -1,0 +1,13 @@
+<h1>New Deed</h1>
+
+<div class="container p-2">
+  <h3 class="fw-lighter">Add a Deed</h3>
+  <!-- <form action="/lists" method="post"> -->
+  <%= simple_form_for @deed do |f| %>
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.submit class: 'btn btn-success my-2 col-2' %>
+  <% end %>
+
+  <%# <%= link_to "Home", deeds_path, class: 'btn btn-primary my-2 col-2' %>
+</div>
