@@ -3,6 +3,7 @@ class DeedsController < ApplicationController
   skip_before_action :authenticate_user!, only: :new
   skip_before_action :authenticate_user!, only: :create
   def index
+    @deeds = Deed.all
   end
 
   def show
