@@ -2,6 +2,8 @@
   <p><%= @deed.title %></p>
   <p><%= @deed.content %></p>
 
-  <%# only show button if @deed.user_id == current_user %>
-  <%= link_to "Open Chat", chat_path, class:"btn btn-primary"  if @deed.user == current_user %>
+  <%# only show chat if @deed.user_id == current_user %>
+  <% if user_signed_in? && @deed.user == current_user %>
+    <%= render "deeds/chat", deed: @deed %>
+  <% end %>
 </div>
