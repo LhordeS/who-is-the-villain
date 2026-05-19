@@ -1,5 +1,7 @@
 class DeedsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: :new
+  skip_before_action :authenticate_user!, only: :create
   def index
   end
 
@@ -7,9 +9,17 @@ class DeedsController < ApplicationController
   end
 
   def new
+    @deed = Deed.new
   end
 
   def create
+    raise
+    @deed = Deed.create(deed_params)
+    if @deed.save?
+      redirect_to deed_path
+    else
+      render :new, status: unprocessable_entity
+    end
   end
 
   def edit
