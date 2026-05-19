@@ -4,10 +4,9 @@
   <h3 class="fw-lighter">Add a Deed</h3>
   <!-- <form action="/lists" method="post"> -->
   <%= simple_form_for @deed do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id  %>
     <%= f.input :title %>
     <%= f.input :content %>
     <%= f.submit class: 'btn btn-success my-2 col-2' %>
   <% end %>
-
-  <%# <%= link_to "Home", deeds_path, class: 'btn btn-primary my-2 col-2' %>
 </div>
