@@ -17,7 +17,7 @@ class DeedsController < ApplicationController
   def create
     @deed = Deed.create(deed_params)
     if @deed.save
-      redirect_to deed_path
+      redirect_to deed_path(@deed)
     else
       render :new, status: :unprocessable_entity
     end
