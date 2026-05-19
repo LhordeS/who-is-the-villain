@@ -6,6 +6,7 @@ class DeedsController < ApplicationController
   end
 
   def show
+    raise
   end
 
   def new
@@ -13,12 +14,11 @@ class DeedsController < ApplicationController
   end
 
   def create
-    raise
     @deed = Deed.create(deed_params)
-    if @deed.save?
-      redirect_to deed_path
+    if @deed.save
+      redirect_to deed_path(@deed)
     else
-      render :new, status: unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
