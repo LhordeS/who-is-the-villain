@@ -1,5 +1,7 @@
 <div class="container">
   <p><%= @deed.title %></p>
   <p><%= @deed.content %></p>
-  <%= link_to "Open Chat", chat_path, class:"btn btn-primary" %>
+
+  <%# only show button if @deed.user_id == current_user %>
+  <%= link_to "Open Chat", chat_path, class:"btn btn-primary"  if @deed.user == current_user %>
 </div>
