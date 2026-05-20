@@ -2,20 +2,20 @@
   <% if message.role == "user" %>
     <div class="d-flex justify-content-end mb-2" data-controller="scroll">
       <div class="bg-white px-3 pb-0 pt-3 rounded-pill">
-        <%= raw(render_markdown(message.content)) %>
+        <%= message.content %>
       </div>
     </div>
   <% elsif message.role == "assistant" %>
     <div class="d-flex justify-content-start mb-5">
       <div class="px-3 pb-0 pt-3">
-        <%= raw(render_markdown(message.content)) %>
+        <%= message.content %>
       </div>
     </div>
   <% end %>
 <% end %>
 
 <%# data-controller="load" %>
-<%= simple_form_for [ deed, @message ], html: { data: { controller: 'load' } } do |f| %>
+<%= simple_form_for [ deed, @message] do |f| %>
   <%= f.input :content, placeholder: "Ask a question", required: true, label: false %>
-  <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary', data: { action: 'click->load#start'} %>
+  <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary'%>
 <% end %>
