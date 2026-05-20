@@ -34,12 +34,11 @@ class DeedsController < ApplicationController
     @deed.summary       = lines[2].split(": ", 2)[1].strip
 
     if @deed.save
-      @ruby_llm_chat = RubyLLM.chat
-      build_conversation_history
-      response = @ruby_llm_chat.with_instructions(instructions).ask(@deed.content)
+      # @ruby_llm_chat = RubyLLM.chat
+      # response = @ruby_llm_chat.with_instructions(system_prompt).ask(@deed.content)
 
-      @assistant_message = @chat.deeds.create(role: "assistant", content: response.content)
-      chat.generate_title_from_first_message
+      # @assistant_message = @deed.messages.create(role: "assistant", content: response.content)
+      # chat.generate_title_from_first_message
 
       redirect_to deed_path(@deed)
     else
