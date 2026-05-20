@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get 'leaderboard', to: "pages#leaderboard"
 
   resources :deeds, except: [:destroy] do
+    member do
+      post 'upvote'
+      post 'downvote'
+    end
     resources :messages, only: [:create]
   end
 

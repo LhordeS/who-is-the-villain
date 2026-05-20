@@ -45,6 +45,18 @@ class DeedsController < ApplicationController
     end
   end
 
+  def upvote
+    @deed = Deed.find(params[:id])
+    @deed.upvote_by current_user
+    redirect_back fallback_location: deeds_path
+  end
+
+  def downvote
+    @deed = Deed.find(params[:id])
+    @deed.downvote_by current_user
+    redirect_back fallback_location: deeds_path
+  end
+
   def edit
   end
 
