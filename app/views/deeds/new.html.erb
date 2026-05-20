@@ -8,6 +8,8 @@
     <%= f.hidden_field :user_id, value: current_user.id  %>
     <%= f.input :title %>
     <%= f.input :content %>
+    <%= f.input_field :public, as: :boolean %>
+    <%= f.label :public, "Make deed public?" %>
     <%= f.submit class: 'btn btn-success my-2 col-2' %>
   <% end %>
 </div>
