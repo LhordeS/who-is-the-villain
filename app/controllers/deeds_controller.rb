@@ -15,6 +15,7 @@ class DeedsController < ApplicationController
 
   def show
     @deed = Deed.find(params[:id])
+    @message = Message.new
   end
 
   def new
@@ -39,6 +40,11 @@ class DeedsController < ApplicationController
     @deed.summary       = lines[2].split(": ", 2)[1].strip
 
     if @deed.save
+      @ruby_llm_chat = RubyLLM.chat
+      response = @ruby_llm_chat.with_instructions(system_prompt).ask(@deed.content)
+
+      @assistant_message = @deed.messages.create(role: "assistant", content: response.content)
+
       redirect_to deed_path(@deed)
     else
       render :new, status: :unprocessable_entity
@@ -55,6 +61,12 @@ class DeedsController < ApplicationController
     @deed = Deed.find(params[:id])
     @deed.downvote_by current_user
     redirect_back fallback_location: deeds_path
+  end
+ 
+  def build_conversation_history
+    @deed.messages.each do |deed|
+      @ruby_llm_chat.add_deed(deed)
+    end
   end
 
   def edit
