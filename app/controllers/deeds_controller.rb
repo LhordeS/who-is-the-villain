@@ -21,9 +21,9 @@ class DeedsController < ApplicationController
     @deed.user = current_user
 
     response = RubyLLM.chat
-      .with_instructions(system_prompt)
-      .with_temperature(0.9)
-      .ask("Title: #{@deed.title}\nSituation: #{@deed.content}")
+                      .with_instructions(system_prompt)
+                      .with_temperature(0.9)
+                      .ask("Title: #{@deed.title}\nSituation: #{@deed.content}")
 
     clean = response.content.gsub(/^Identified.*\n/, "")
     lines = clean.lines
@@ -34,9 +34,22 @@ class DeedsController < ApplicationController
     @deed.summary       = lines[2].split(": ", 2)[1].strip
 
     if @deed.save
+      @ruby_llm_chat = RubyLLM.chat
+      build_conversation_history
+      response = @ruby_llm_chat.with_instructions(instructions).ask(@deed.content)
+
+      @assistant_message = @chat.deeds.create(role: "assistant", content: response.content)
+      chat.generate_title_from_first_message
+
       redirect_to deed_path(@deed)
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def build_conversation_history
+    @deed.messages.each do |deed|
+      @ruby_llm_chat.add_deed(deed)
     end
   end
 
