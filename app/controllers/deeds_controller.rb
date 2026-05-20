@@ -10,6 +10,7 @@ class DeedsController < ApplicationController
 
   def show
     @deed = Deed.find(params[:id])
+    @message = Message.new
   end
 
   def new

@@ -6,11 +6,6 @@
     <%= @deed.ai_verdict %>
   </div>
 
-  <%# Title %>
-  <h1 class="verdict__title">
-    <span><%= @deed.title %></span>
-  </h1>
-
   <%# Score bar %>
   <% score = @deed.villain_score.to_i %>
   <% score_pct = score == -1 ? 0 : score %>
@@ -22,13 +17,6 @@
     </span>
   </p>
 
-  <div class="score-bar">
-  </div>
-  <div class="score-bar__labels">
-    <span>Sainted Hero</span>
-    <span>Pure Menace</span>
-  </div>
-
     <%= @deed.summary %>
   </p>
 
@@ -36,6 +24,6 @@
 
   <%# only show chat if @deed.user_id == current_user %>
   <% if user_signed_in? && @deed.user == current_user %>
-    <%= render "deeds/chat", deed: @deed %>
+    <%= render "deeds/chat", deed: @deed, message: @message %>
   <% end %>
 </div>

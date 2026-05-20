@@ -15,7 +15,7 @@
 <% end %>
 
 <%# data-controller="load" %>
-<%= simple_form_for deed, html: { data: { controller: 'load' } } do |f| %>
+<%= simple_form_for [ deed, @message ], html: { data: { controller: 'load' } } do |f| %>
   <%= f.input :content, placeholder: "Ask a question", required: true, label: false %>
   <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary', data: { action: 'click->load#start'} %>
 <% end %>
