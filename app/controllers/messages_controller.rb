@@ -3,17 +3,54 @@ class MessagesController < ApplicationController
     @deed = Deed.find(params[:deed_id])
     @message = @deed.messages.new(message_params)
     @message.role = "user"
-    raise unless @message.save
 
-    redirect_to deed_path(@message.deed)
-  end
+    if @message.save
+      llm_response = fetch_llm_response
+      Message.create(
+        role: "assistant",
+        content: llm_response.content,
+        deed: @deed
+      )
 
-  def show
-    @deed = Deed.find(params[:id])
-    @message = Message.new
+      respond_to do |format|
+        format.html { redirect_to deed_path(@deed) }
+        format.turbo_stream
+      end
+    else
+      render deed_path(@deed), status: :unprocessable_entity
+    end
   end
 
   private
+
+  def fetch_llm_response
+    ruby_llm_chat = RubyLLM.chat
+    ruby_llm_chat.with_instructions(system_prompt)
+    @deed.messages.each { |m| ruby_llm_chat.add_message(m) }
+    ruby_llm_chat.ask(@message.content)
+  end
+
+  def system_prompt
+    <<~PROMPT
+      You are the judge of "Am I the Villain?" — a brutally honest, witty arbiter of moral situations.
+      Users confess a deed and you decide: are they the villain or the hero?
+
+      Channel Judge Judy. Sharp, no-nonsense, a little savage, zero tolerance for excuses or self-pity.
+      You've heard every justification in the book and you're not impressed. Be entertaining but fair, and never sugarcoat the verdict.
+      Never use emojis or em dashes.
+
+      Respond in exactly this format:
+
+      SCORE: <integer 0-100>
+      VERDICT: <Sainted Hero|Mostly Innocent|Morally Grey|Kinda Shady|Pure Menace>
+      SUMMARY: <witty but fair judgment, as long as needed>
+
+      Scoring: 0-20 Sainted Hero, 21-40 Mostly Innocent, 41-60 Morally Grey, 61-80 Kinda Shady, 81-100 Pure Menace.
+      Be entertaining but fair. If the story sounds one-sided, factor that in.
+      Never reference real names.
+      Flag serious crimes like fraud, violence, abuse, or anything with potential criminal charges with SCORE: Flagged and VERDICT: Flagged. Minor property disputes, petty theft, or interpersonal drama should be judged normally.
+    PROMPT
+  end
 
   def message_params
     params.require(:message).permit(:content)

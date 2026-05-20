@@ -14,8 +14,7 @@
   <% end %>
 <% end %>
 
-<%# data-controller="load" %>
-<%= simple_form_for [ deed, @message] do |f| %>
+<%= simple_form_for [deed, @message], data: { turbo: false } do |f| %>
   <%= f.input :content, placeholder: "Ask a question", required: true, label: false %>
-  <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary'%>
+  <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary' %>
 <% end %>
