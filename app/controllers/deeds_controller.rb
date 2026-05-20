@@ -6,6 +6,11 @@ class DeedsController < ApplicationController
 
   def index
     @deeds = Deed.all
+    if params[:search] && params[:search][:query].present?
+      @deeds = Deed.where('content ILIKE :search OR title ILIKE :search', search: "%#{params[:search][:query]}%")
+    else
+      @deeds = Deed.all
+    end
   end
 
   def show
@@ -21,9 +26,9 @@ class DeedsController < ApplicationController
     @deed.user = current_user
 
     response = RubyLLM.chat
-      .with_instructions(system_prompt)
-      .with_temperature(0.9)
-      .ask("Title: #{@deed.title}\nSituation: #{@deed.content}")
+                      .with_instructions(system_prompt)
+                      .with_temperature(0.9)
+                      .ask("Title: #{@deed.title}\nSituation: #{@deed.content}")
 
     clean = response.content.gsub(/^Identified.*\n/, "")
     lines = clean.lines
@@ -47,6 +52,10 @@ class DeedsController < ApplicationController
   end
 
   private
+
+  # def clear_query_cache
+  #   @deeds.clear_query_cache
+  # end
 
   def deed_params
     params.require(:deed).permit(:title, :content, :public)
