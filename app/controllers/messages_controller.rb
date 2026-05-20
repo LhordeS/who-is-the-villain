@@ -1,7 +1,9 @@
 class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
-    raise
+    raise unless @message.save
+
+    redirect_to deed_path(@message.deed)
   end
 
   private
