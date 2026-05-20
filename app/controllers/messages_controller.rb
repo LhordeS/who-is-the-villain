@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
 
     if @message.save
       llm_response = fetch_llm_response
-      Message.create(
+      @assistant_message = Message.create(
         role: "assistant",
         content: llm_response.content,
         deed: @deed
