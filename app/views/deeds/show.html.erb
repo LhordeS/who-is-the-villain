@@ -1,9 +1,29 @@
 <div class="container">
-  <p><%= @deed.title %></p>
-  <p><%= @deed.content %></p>
+<div class="card">
+
+  <%# Verdict badge %>
+  <div class="verdict__badge verdict__badge--<%= @deed.ai_verdict.to_s.parameterize %>">
+    <%= @deed.ai_verdict %>
+  </div>
+
+  <%# Score bar %>
+  <% score = @deed.villain_score.to_i %>
+  <% score_pct = score == -1 ? 0 : score %>
+
+  <p class="form-label" style="margin-top: 16px;">
+    Villain score
+    <span class="verdict__score" style="float:right; color: #F23022;">
+      <%= score == -1 ? "Flagged" : "#{score}/100" %>
+    </span>
+  </p>
+
+    <%= @deed.summary %>
+  </p>
+
+</div>
 
   <%# only show chat if @deed.user_id == current_user %>
   <% if user_signed_in? && @deed.user == current_user %>
-    <%= render "deeds/chat", deed: @deed %>
+    <%= render "deeds/chat", deed: @deed, message: @message %>
   <% end %>
 </div>
