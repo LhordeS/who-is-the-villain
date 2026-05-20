@@ -6,52 +6,46 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse d-flex justify-content-between bg-red" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-          <li class="nav-item active">
-            <%= link_to "Home", "/#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Post", "/deeds/new", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Dashboard", "/dashboard", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Leaderboard", "/leaderboard", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= simple_form_for :search, url: root_path, method: :get do |f| %>
+        <li class="nav-item active">
+          <%= link_to "Home", "/#", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Deeds", "/deeds", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Leaderboard", "/leaderboard", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= simple_form_for :search, url: root_path, method: :get do |f| %>
             <div class="search-form-control form-group">
               <input class="form-control string required" type="text" name="search[query]" id="search_query" />
               <button name="button" type="submit" class="btn btn-flat">
                 <i class="fas fa-search"></i> Search
               </button>
             </div>
+          <% end %>
+        </li class="nav-item">
+        <i class="fa-regular fa-bell"></i>
+        <li>
+        </li>
+        <li class="nav-item dropdown">
+          <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <% if current_user %>
+              <%= link_to "Post", "/deeds/new", class: "dropdown-item" %>
+              <%= link_to "Dashboard", "/dashboard", class: "dropdown-item" %>
+              <%= link_to 'Log Out', "/users/sign_out", class: "dropdown-item", data: { turbo_method: 'delete' } %>
+            <% else %>
+              <%= link_to 'Log in', "/users/sign_in", class: "dropdown-item" %>
             <% end %>
-          </li class="nav-item">
-            <i class="fa-regular fa-bell"></i>
-          <li>
-
-          </li>
-          <li class="nav-item dropdown">
-            <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-                <% if current_user %>
-                  <%= link_to 'Log Out', "/users/sign_out", class: "dropdown-item", data: { turbo_method: 'delete' } %>
-                <% else %>
-                  <%= link_to 'Log in', "/users/sign_in", class: "dropdown-item" %>
-                <% end %>
-            </div>
-          </li>
-          <!--li class="nav-item"-->
-          <!--/li-->
+          </div>
+        </li>
+        <!--li class="nav-item"-->
+        <!--/li-->
       </ul>
       <ul class="search">
-
       </ul>
     </div>
   </div>
