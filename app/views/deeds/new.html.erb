@@ -4,10 +4,10 @@
 <div class="container p-2">
   <h3 class="fw-lighter">Add a Deed</h3>
   <!-- <form action="/lists" method="post"> -->
-  <%= simple_form_for @deed do |f| %>
+  <%= simple_form_for @deed, html:{data: { controller: "submit-on-enter"}} do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id  %>
     <%= f.input :title %>
-    <%= f.input :content %>
+    <%= f.input :content, input_html: {data: { action: "keydown->submit-on-enter#submit"}} %>
     <%= f.input_field :public, as: :boolean %>
     <%= f.label :public, "Make deed public?" %>
     <%= f.submit class: 'btn btn-success my-2 col-2' %>
