@@ -99,7 +99,10 @@ class DeedsController < ApplicationController
   def destroy
     @deed = Deed.find(params[:id])
     @deed.destroy
-    redirect_back_or_to deeds_path, status: :see_other
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back_or_to deeds_path, status: :see_other }
+    end
   end
 
   private

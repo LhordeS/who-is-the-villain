@@ -14,3 +14,20 @@
   margin: 2rem auto 1.5rem;
   letter-spacing: -0.02em;
 }
+
+.card {
+  position: relative;
+}
+
+.card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.delete-link {
+  z-index: 2;
+}
