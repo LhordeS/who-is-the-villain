@@ -11,9 +11,13 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <div class="d-flex flex-row mb-2">
-            <i class="fa-solid fa-skull border border-dark rounded-circle p-2"></i>
-            <p class="card-text p-1">Anonymous Villain</p>
+          <div class="d-flex flex-row mb-1">
+            <i class="fa-solid fa-skull border border-dark rounded-circle p-3"></i>
+            <% if deed.user == current_user %>
+              <p class="card-text pl-3 pt-3"><%= "You" %></p>
+            <% else %>
+              <p class="card-text pl-3 pt-3"><%= "Anonymous Villain" %></p>
+            <% end %>
           </div>
           <h5 class="card-title"><%= deed.title %></h5>
           <p class="card-text mb-2"><%= deed.content %></p>
