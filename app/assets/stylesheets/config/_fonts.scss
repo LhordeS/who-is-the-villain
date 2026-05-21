@@ -1,4 +1,11 @@
 // Am I the Villain - Font Variables
+/* Am I the Villain - Font Imports */
+
+/* Primary Font - Inter (for body text, UI elements) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Display Font - Space Grotesk (for headings) */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
 
 // Font Families
 $font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
