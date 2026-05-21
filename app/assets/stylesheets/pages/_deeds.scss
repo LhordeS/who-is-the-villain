@@ -1,3 +1,104 @@
+// ── Show Page Cards ───────────────────────────────────────────────────────────
+
+// Content card (has deed text + voting)
+.card:has(.d-flex):not(:has(.verdict__badge)) {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  color: $text-primary;
+  line-height: $line-height-relaxed;
+
+  .d-flex {
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+
+    a {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      text-decoration: none;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      white-space: nowrap;
+
+      &:nth-child(1) { color: $verdict-villain-text; background: $verdict-villain-bg; }
+      &:nth-child(2) { color: $verdict-saint-text;  background: $verdict-saint-bg;  }
+      &:nth-child(3) { color: $verdict-sketchy-text; background: #fce8de;           }
+
+      &:hover { opacity: 0.75; }
+    }
+  }
+}
+
+// Verdict card
+.card:has(.verdict__badge) {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+// ── Verdict Badge ─────────────────────────────────────────────────────────────
+
+.verdict__badge {
+  display: inline-block;
+  font-family: $font-display;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+
+  &--sainted-hero    { background: $verdict-saint-bg;  color: $verdict-saint-text;   }
+  &--mostly-innocent { background: #d1fae5;             color: #065f46;               }
+  &--morally-grey    { background: #fef9c3;             color: #854d0e;               }
+  &--kinda-shady     { background: #ffedd5;             color: #9a3412;               }
+  &--pure-menace     { background: $verdict-villain-bg; color: $verdict-villain-text; }
+  &--flagged         { background: #f3f4f6;             color: #374151;               }
+}
+
+// ── Score Row ─────────────────────────────────────────────────────────────────
+
+.card:has(.verdict__badge) .form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: $font-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $text-secondary;
+  margin-bottom: 0.5rem;
+}
+
+.verdict__score {
+  font-family: $font-display;
+  font-size: $font-size-2xl !important;
+  font-weight: $font-weight-bold;
+  float: none !important;
+  line-height: 1;
+}
+
+// ── Summary Text ──────────────────────────────────────────────────────────────
+
+.card:has(.verdict__badge) > p:last-of-type {
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0.75rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid $bg-light-gray;
+}
+
 // ── Chat ─────────────────────────────────────────────────────────────────────
 #messages {
   display: flex;
