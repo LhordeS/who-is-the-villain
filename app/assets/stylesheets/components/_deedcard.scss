@@ -1,12 +1,77 @@
 .deed-card {
-  background: $bg-white;
-  border: 1px solid $bg-light-gray;
+  width: 100% !important;
+  border: none;
   border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     transform: translateY(-2px);
+  }
+
+  // Stack author block above card body instead of side-by-side
+  .row.g-0 {
+    flex-direction: column;
+  }
+
+  .col-md-4,
+  .col-md-8 {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 auto;
+  }
+
+  // Author / skull header
+  .col-md-4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1rem 0;
+
+    .fa-skull {
+      color: $primary-purple;
+      font-size: $font-size-base;
+    }
+
+    .card-text {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $text-secondary;
+      margin: 0;
+      white-space: nowrap;
+    }
+  }
+
+  // Body
+  .card-body {
+    padding: 0.75rem 1rem 1rem;
+  }
+
+  .card-title {
+    font-family: $font-display;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    line-height: $line-height-tight;
+    margin-bottom: 0.5rem;
+  }
+
+  .col-md-8 .card-text {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    line-height: $line-height-relaxed;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+
+  // Voting row
+  .d-flex {
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
 }
