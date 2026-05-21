@@ -4,9 +4,7 @@
       Am I the Villain?
     <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
@@ -27,7 +25,6 @@
           <%= link_to "Leaderboard", leaderboard_path, class: "nav-link #{current_page?(leaderboard_path) ? 'active' : ''}" %>
         </li>
       </ul>
-
       <div class="navbar-right d-flex align-items-center gap-3">
         <%= form_with url: deeds_path, method: :get, class: "villain-search-form" do |f| %>
           <div class="villain-search-wrapper">
@@ -38,10 +35,7 @@
             </button>
           </div>
         <% end %>
-
-
         <i class="fa-regular fa-bell villain-bell"></i>
-
         <% if user_signed_in? %>
           <div class="dropdown">
             <img class="villain-avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
