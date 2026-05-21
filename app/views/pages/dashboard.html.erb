@@ -1,5 +1,5 @@
 <h1>Dashboard</h1>
-<div class="container bg-secondary-subtle">
+<div class="container card-container">
   <% @deeds.each do |deed| %>
     <% if deed.user == current_user %>
       <%= render 'shared/deed_cards', deed: deed %>

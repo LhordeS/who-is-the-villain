@@ -1,4 +1,4 @@
-<div class="container bg-secondary-subtle">
+<div class="container card-container">
   <% @deeds.each do |deed| %>
     <% if deed.public == true %>
       <%= render 'shared/deed_cards', deed: deed %>
