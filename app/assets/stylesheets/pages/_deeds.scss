@@ -1,3 +1,98 @@
+// ── New Deed Page ─────────────────────────────────────────────────────────────
+
+// Top-level page titles (New Deed, Leaderboard, Hall of Judgment)
+body > h1 {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin: 2rem auto 1.5rem;
+}
+
+// Purple card wrapper — only used on the new deed page
+.container.p-2 {
+  background: $primary-purple;
+  border-radius: 16px;
+  padding: 2rem !important;
+  max-width: 680px;
+  margin-bottom: 2rem;
+
+  h3 {
+    font-family: $font-display;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 1.25rem;
+  }
+}
+
+// White form card inside the purple wrapper
+.new_deed {
+  background: $bg-white;
+  border-radius: 12px;
+  padding: 1.75rem;
+
+  label {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: 0.3rem;
+  }
+
+  input.form-control,
+  textarea.form-control {
+    border-radius: 10px;
+    border: 1.5px solid rgba($primary-purple, 0.2);
+    padding: 0.65rem 1rem;
+    font-size: $font-size-base;
+    font-family: $font-primary;
+    color: $text-primary;
+    background: $bg-white;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &:focus {
+      border-color: $primary-purple;
+      box-shadow: 0 0 0 3px rgba($primary-purple, 0.12);
+      outline: none;
+    }
+  }
+
+  textarea.form-control {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  input[type="checkbox"] {
+    accent-color: $primary-purple;
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+  }
+
+  // Override Bootstrap green + col-2 width truncation
+  input[type="submit"] {
+    background-color: $primary-purple !important;
+    border-color: $primary-purple !important;
+    color: $text-white !important;
+    border-radius: 10px;
+    padding: 0.6rem 1.75rem;
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    width: auto !important;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      background-color: $primary-purple-dark !important;
+      border-color: $primary-purple-dark !important;
+      box-shadow: 0 4px 12px rgba($primary-purple, 0.25);
+    }
+  }
+}
+
 // ── Chat ─────────────────────────────────────────────────────────────────────
 #messages {
   display: flex;
