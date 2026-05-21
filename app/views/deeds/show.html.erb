@@ -22,6 +22,7 @@
     </span>
   </p>
 
+  <p>
     <%= @deed.summary %>
     <div class="d-flex">
     <%= link_to "👹 Villain (#{@deed.votes_for.up.where(vote_scope: nil).size})", upvote_deed_path(@deed), data: { turbo_method: :post} %>
