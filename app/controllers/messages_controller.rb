@@ -6,9 +6,12 @@ class MessagesController < ApplicationController
 
     if @message.save
       llm_response = fetch_llm_response
+      parsed_response = JSON.parse(llm_response.content)
+      @deed.villain_score = parsed_response["score"]
+      @deed.save
       @assistant_message = Message.create(
         role: "assistant",
-        content: llm_response.content,
+        content: parsed_response["messageContent"],
         deed: @deed
       )
 
@@ -39,16 +42,16 @@ class MessagesController < ApplicationController
       You've heard every justification in the book and you're not impressed. Be entertaining but fair, and never sugarcoat the verdict.
       Never use emojis or em dashes.
 
-      Respond in exactly this format:
-
-      SCORE: <integer 0-100>
-      VERDICT: <Sainted Hero|Mostly Innocent|Morally Grey|Kinda Shady|Pure Menace>
-      SUMMARY: <witty but fair judgment, as long as needed>
-
-      Scoring: 0-20 Sainted Hero, 21-40 Mostly Innocent, 41-60 Morally Grey, 61-80 Kinda Shady, 81-100 Pure Menace.
+      Scoring: Recalculate the score based on the context of the new message, as well as the overall situation. 0-20 Sainted Hero, 21-40 Mostly Innocent, 41-60 Morally Grey, 61-80 Kinda Shady, 81-100 Pure Menace.
       Be entertaining but fair. If the story sounds one-sided, factor that in.
       Never reference real names.
       Flag serious crimes like fraud, violence, abuse, or anything with potential criminal charges with SCORE: Flagged and VERDICT: Flagged. Minor property disputes, petty theft, or interpersonal drama should be judged normally.
+
+      Respond only with a JSON formated exactly like this (no extra text after the JSON):
+        {
+          "score": Here, put the score computed in the scoring section,
+          "messageContent": Here put the message for the user as specified in the prompt block
+        }
     PROMPT
   end
 
