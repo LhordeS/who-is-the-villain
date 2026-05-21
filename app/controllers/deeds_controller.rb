@@ -97,6 +97,12 @@ class DeedsController < ApplicationController
   def update
   end
 
+  def destroy
+    @deed = Deed.find(params[:id])
+    @deed.destroy
+    redirect_back_or_to deeds_path, status: :see_other
+  end
+
   private
 
   # def clear_query_cache

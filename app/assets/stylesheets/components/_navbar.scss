@@ -1,12 +1,101 @@
-.navbar-lewagon {
-  justify-content: space-between;
+.navbar-villain {
   background: white;
+  border-bottom: 1px solid #e5e2ef;
+  padding: 10px 24px;
+
+  .villain-brand {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #2d1b4e !important;
+    text-decoration: none;
+    margin-right: 2rem;
+    letter-spacing: -0.3px;
+  }
+
+  .nav-link {
+    color: #6b6b80;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 4px 14px;
+    transition: color 0.15s;
+
+    &:hover {
+      color: #2d1b4e;
+    }
+
+    &.active {
+      color: #2d1b4e;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-right {
+  margin-left: auto;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.villain-search-form {
+  .villain-search-wrapper {
+    display: flex;
+    align-items: center;
+    background: #f0eef7;
+    border-radius: 50px;
+    padding: 7px 14px;
+    gap: 8px;
+
+    .villain-search-icon {
+      color: #888;
+      font-size: 0.85rem;
+    }
+
+    .villain-search-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 0.9rem;
+      color: #444;
+      width: 140px;
+
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+
+    .villain-search-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #888;
+      padding: 0;
+      font-size: 0.85rem;
+
+      &:hover {
+        color: #2d1b4e;
+      }
+    }
+  }
+}
+
+.villain-bell {
+  font-size: 1.15rem;
+  color: #6b6b80;
+  cursor: pointer;
+
+  &:hover {
+    color: #2d1b4e;
+  }
+}
+
+.villain-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+
+  &::after {
+    display: none;
+  }
 }
