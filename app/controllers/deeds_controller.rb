@@ -37,13 +37,13 @@ class DeedsController < ApplicationController
     score_raw           = lines[0].split(": ", 2)[1].strip
     @deed.villain_score = score_raw == "Flagged" ? -1 : score_raw.to_i
     @deed.ai_verdict    = lines[1].split(": ", 2)[1].strip
-    @deed.summary       = lines[2].split(": ", 2)[1].strip
+    @deed.summary = lines[2].split(": ", 2)[1].strip
 
     if @deed.save
       @ruby_llm_chat = RubyLLM.chat
       response = @ruby_llm_chat.with_instructions(system_prompt).ask(@deed.content)
 
-      @assistant_message = @deed.messages.create(role: "assistant", content: response.content)
+      # @assistant_message = @deed.messages.create(role: "assistant", content: response.content)
 
       redirect_to deed_path(@deed)
     else
