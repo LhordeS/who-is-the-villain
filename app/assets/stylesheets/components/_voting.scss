@@ -1,14 +1,30 @@
-.villain {
+.villain,
+.saint,
+.bs {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
   text-decoration: none;
-  color: #991b1b;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.8;
+    text-decoration: none;
+  }
+}
+
+.villain {
+  color: $verdict-villain-text;
+  background: $verdict-villain-bg;
 }
 
 .saint {
-  text-decoration: none;
-  color: #166534;
+  color: $verdict-saint-text;
+  background: $verdict-saint-bg;
 }
 
 .bs {
-  text-decoration: none;
-  color: #c2410c;
+  color: $verdict-sketchy-text;
+  background: #fce8de;
 }
