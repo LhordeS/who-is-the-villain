@@ -18,6 +18,8 @@
   </p>
 
     <%= @deed.summary %>
+    <%= link_to "Villain (#{@deed.get_upvotes.size})", upvote_deed_path(@deed), data: { turbo_method: :post} %>
+    <%= link_to "Saint (#{@deed.get_downvotes.size})", downvote_deed_path(@deed), data: { turbo_method: :post} %>
   </p>
 
 </div>

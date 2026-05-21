@@ -62,7 +62,7 @@ class DeedsController < ApplicationController
     @deed.downvote_by current_user
     redirect_back fallback_location: deeds_path
   end
- 
+
   def build_conversation_history
     @deed.messages.each do |deed|
       @ruby_llm_chat.add_deed(deed)
