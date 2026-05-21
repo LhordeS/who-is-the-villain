@@ -1,5 +1,11 @@
 <%= link_to deed_path(deed), class: "text-decoration-none text-dark" do %>
   <div class="card deed-card mb-3" style="width: 80%;">
+    <% if deed.user == current_user %>
+      <%= button_to "X", deed_path(deed), method: :delete,
+      form: { data: { controller: "stop-propagation", action: "click->stop-propagation#stop" } },
+      class: "btn btn-sm position-absolute top-0 end-0 m-2",
+      data: {turbo_confirm: "Delete #{deed.title}?"}%>
+    <% end %>
     <div class="row g-0">
       <div class="col-md-4">
         <i class="fa-solid fa-skull"></i>

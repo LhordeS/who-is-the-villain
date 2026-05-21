@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: "pages#dashboard"
   get 'leaderboard', to: "pages#leaderboard"
 
-  resources :deeds, except: [:destroy] do
+  resources :deeds do
     member do
       post 'upvote'
       post 'downvote'
