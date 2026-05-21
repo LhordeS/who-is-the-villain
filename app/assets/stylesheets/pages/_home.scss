@@ -1,1 +1,120 @@
-// Specific CSS for your home-page
+@import '../config/colors';
+@import '../config/fonts';
+
+/* Landing Page Styles */
+/* BEM Methodology: Block__Element--Modifier */
+
+/* Hero Section */
+.hero-card {
+  background: $bg-white;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 3rem;
+
+  &__title {
+    font-family: $font-display;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: 1rem;
+    line-height: $line-height-tight;
+  }
+
+  &__description {
+    font-family: $font-primary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-regular;
+    color: $text-secondary;
+    margin-bottom: 2rem;
+    line-height: $line-height-relaxed;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__action-link {
+    display: inline-block;
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &--primary {
+      background: $primary-purple;
+      color: $text-white;
+
+      &:hover {
+        background: $primary-purple-dark;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(61, 39, 102, 0.2);
+      }
+    }
+
+    &--secondary {
+      background: $accent-yellow;
+      color: $text-primary;
+
+      &:hover {
+        background: $accent-yellow-hover;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(244, 208, 63, 0.3);
+      }
+    }
+  }
+}
+
+/* Trending Section */
+.trending-section {
+  margin-bottom: 2rem;
+
+  &__header {
+    font-family: $font-display;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: 1.5rem;
+  }
+
+  &__container {
+    background: $bg-light-gray;
+    padding: 2rem;
+    border-radius: 12px;
+  }
+}
+
+/* Main Container */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  @media (min-width: 768px) {
+    padding: 3rem 2rem;
+  }
+}
+
+/* Deed Cards Grid */
+.deeds-grid {
+  display: grid;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

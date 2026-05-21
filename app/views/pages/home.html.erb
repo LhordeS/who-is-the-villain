@@ -1,18 +1,23 @@
-<div class="container">
-  <div class="card">
-    <h1>Are you a saint or a total disaster?</h1>
-    <p>Submit your most questionalbe life choices, get an instant verdict
+<div class="main-container">
+  <div class="hero-card">
+    <h1 class="hero-card__title">Are you a saint or a total disaster?</h1>
+    <p class="hero-card__description">Submit your most questionalbe life choices, get an instant verdict
       from our AI chatbot, and let the community vote on your conscience.
     </p>
-    <%= link_to "Post a Deed", new_deed_path, class: "text-decoration-none text-dark" %>
-    <%= link_to "Browse Other Deeds", deeds_path, class: "text-decoration-none text-dark" %>
+    <div class="hero-card__actions">
+      <%= link_to "Post a Deed", new_deed_path, class: "hero-card__action-link hero-card__action-link--primary" %>
+      <%= link_to "Browse Other Deeds", deeds_path, class: "hero-card__action-link hero-card__action-link--secondary" %>
+    </div>
   </div>
-  <div>
-    <h2>Trending Villainies</h2>
-  </div>
-  <div class="container bg-secondary-subtle">
-    <% @deeds.each do |deed| %>
-      <%= render 'shared/deed_cards', deed: deed %>
-    <% end %>
+
+  <div class="trending-section">
+    <h2 class="trending-section__header">Trending Villainies</h2>
+    <div class="trending-section__container">
+      <div class="deeds-grid">
+        <% @deeds.each do |deed| %>
+          <%= render 'shared/deed_cards', deed: deed %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
