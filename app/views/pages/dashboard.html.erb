@@ -2,27 +2,7 @@
 <div class="container bg-secondary-subtle">
   <% @deeds.each do |deed| %>
     <% if deed.user == current_user %>
-      <%= link_to deed_path(deed), class: "text-decoration-none text-dark" do %>
-        <div class="card mb-3" style="width: 80%;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="..." class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= deed.title %></h5>
-                <p class="card-text"><%= deed.content %></p>
-                <div class="d-flex">
-                <%= link_to "👹 Villain (#{deed.votes_for.up.where(vote_scope: nil).size})", upvote_deed_path(deed), data: { turbo_method: :post} %>
-                <%= link_to "😇 Saint (#{deed.votes_for.down.where(vote_scope: nil).size})", downvote_deed_path(deed), data: { turbo_method: :post} %>
-                <%= link_to "🤥 bs (#{deed.get_upvotes(vote_scope: 'flag').size})", flag_deed_path(deed), data: { turbo_method: :post } %>
-                </div>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'shared/deed_cards', deed: deed %>
     <% end %>
   <% end %>
 </div>
