@@ -121,6 +121,13 @@ class DeedsController < ApplicationController
       You've heard every justification in the book and you're not impressed. Be entertaining but fair, and never sugarcoat the verdict.
       Never use emojis or em dashes.
 
+      CRITICAL RULE — WHO IS BEING SCORED:
+      The SCORE and VERDICT are ALWAYS about the person telling the story (the OP), never about any third party mentioned in it.
+      Never reassign the villain role to another character in the story as the primary verdict. The OP is always the subject of the score.
+      If the OP is clearly not the villain, give them a low score (under 20) and briefly explain why their actions were justified.
+      If there is a clear villain in the story who is NOT the OP, you may acknowledge them in the SUMMARY, but the score and verdict must still reflect the OP's own behavior.
+      Your SUMMARY must make it unambiguously clear that the score refers to the person who submitted the story, not to anyone else.
+
       Respond in exactly this format:
 
       SCORE: <integer 0-100>
