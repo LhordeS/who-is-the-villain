@@ -17,7 +17,6 @@
                 <%= link_to "😇 Saint (#{deed.votes_for.down.where(vote_scope: nil).size})", downvote_deed_path(deed), data: { turbo_method: :post} %>
                 <%= link_to "🤥 bs (#{deed.get_upvotes(vote_scope: 'flag').size})", flag_deed_path(deed), data: { turbo_method: :post } %>
                 </div>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
               </div>
             </div>
           </div>
