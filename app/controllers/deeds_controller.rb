@@ -5,9 +5,8 @@ class DeedsController < ApplicationController
   # skip_before_action :authenticate_user!, only: :show
 
   def index
-    @deeds = Deed.all
-    if params[:search] && params[:search][:query].present?
-      @deeds = Deed.where('content ILIKE :search OR title ILIKE :search', search: "%#{params[:search][:query]}%")
+    if params[:query].present?
+      @deeds = Deed.where('content ILIKE :search OR title ILIKE :search', search: "%#{params[:query]}%")
     else
       @deeds = Deed.all
     end
