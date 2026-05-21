@@ -1,4 +1,14 @@
-<%= simple_form_for [deed, message] do |f| %>
-  <%= f.input :content, placeholder: "Ask a question", required: true, label: false %>
+<%= simple_form_for [deed, message], html:{data: {
+      controller: "submit-on-enter"}} do |f| %>
+  <%= f.input :content,
+  placeholder: "Ask a question",
+  required: true,
+  label: false,
+  input_html: {
+    data: {
+      action: "keydown->submit-on-enter#submit"
+    }
+  }
+  %>
   <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary' %>
 <% end %>
