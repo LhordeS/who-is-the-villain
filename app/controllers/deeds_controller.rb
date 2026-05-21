@@ -53,7 +53,7 @@ class DeedsController < ApplicationController
 
   def upvote
     @deed = Deed.find(params[:id])
-
+    @deed.unliked_by current_user, vote_scope: 'flag'
     if current_user.voted_up_on? @deed
       @deed.unliked_by current_user
     else
@@ -64,6 +64,7 @@ class DeedsController < ApplicationController
 
   def downvote
     @deed = Deed.find(params[:id])
+    @deed.unliked_by current_user, vote_scope: 'flag'
     if current_user.voted_down_on? @deed
       @deed.undisliked_by current_user
     else
@@ -74,6 +75,8 @@ class DeedsController < ApplicationController
 
   def flag
     @deed = Deed.find(params[:id])
+    @deed.unliked_by current_user
+    @deed.undisliked_by current_user
     if current_user.voted_for? @deed, vote_scope: 'flag'
       @deed.unliked_by current_user, vote_scope: 'flag'
     else
