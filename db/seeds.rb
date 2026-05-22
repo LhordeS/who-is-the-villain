@@ -101,7 +101,7 @@ users = User.all
     title: DEED_TITLES.sample,
     content: DEED_BODIES.sample,
     user: users.sample,
-    public: [true, false].sample,
+    public: true,
     villain_score: rand(0..100),
     summary: DEED_SUMMARIES.sample
   )
