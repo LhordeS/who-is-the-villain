@@ -1,7 +1,8 @@
 <div class="container pt-4">
 
 <div class="card">
-  <%= @deed.content %>
+  <h5 class="card-title mt-4"><%= @deed.title %></h5>
+  <p class="card-text mb-2"><%= @deed.content %></p>
   <%= render 'shared/vote_buttons', deed: @deed %>
 </div>
 
