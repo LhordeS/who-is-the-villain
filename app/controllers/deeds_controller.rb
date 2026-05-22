@@ -58,7 +58,10 @@ class DeedsController < ApplicationController
     else
       @deed.upvote_by current_user
     end
-    redirect_back fallback_location: deeds_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back_or_to deeds_path, status: :see_other }
+    end
   end
 
   def downvote
@@ -69,7 +72,10 @@ class DeedsController < ApplicationController
     else
       @deed.downvote_from current_user
     end
-    redirect_back fallback_location: deeds_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back_or_to deeds_path, status: :see_other }
+    end
   end
 
   def flag
@@ -81,7 +87,10 @@ class DeedsController < ApplicationController
     else
       @deed.liked_by current_user, vote_scope: 'flag'
     end
-    redirect_back fallback_location: deeds_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back_or_to deeds_path, status: :see_other }
+    end
   end
 
   def build_conversation_history

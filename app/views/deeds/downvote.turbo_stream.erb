@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@deed, :votes) do %>
+  <%= render 'shared/vote_buttons', deed: @deed %>
+<% end %>
