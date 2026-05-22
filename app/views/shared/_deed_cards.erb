@@ -4,22 +4,22 @@
       <%= link_to "X", deed_path(deed),
       class: "btn btn-sm position-absolute top-0 end-0 m-2 delete-link",
       data: { turbo_method: :delete } %>
-     <% end %>
+    <% end %>
     <div class="row g-0">
       <div class="col-md-4">
       </div>
       <div class="col-md-8">
         <div class="card-body">
           <div class="d-flex flex-row mb-1">
-            <i class="fa-solid fa-skull border border-dark rounded-circle p-3"></i>
-            <% if deed.user == current_user %>
-              <p class="card-text pl-3 pt-3"><%= "You" %></p>
+            <% if deed.user.avatar.attached? %>
+              <%= cl_image_tag deed.user.avatar.key, alt: "avatar", class: "avatar-bordered" %>
             <% else %>
-              <p class="card-text pl-3 pt-3"><%= "Anonymous Villain" %></p>
+              <i class="fa-regular fa-circle-user fa-2xl"></i>
             <% end %>
-          </div>
-          <h5 class="card-title"><%= deed.title %></h5>
-          <p class="card-text mb-2"><%= deed.content %></p>
+            <p class="card-text"><%= deed.user.username %></p>
+        </div>
+        <h5 class="card-title"><%= deed.title %></h5>
+        <p class="card-text mb-2"><%= deed.content %></p>
           <div class="d-flex" id="<%= dom_id(deed, :votes) %>">
             <%= link_to "👹 Villain #{deed.votes_for.up.where(vote_scope: nil).size}", upvote_deed_path(deed), data: { turbo_method: :post}, class: 'villain delete-link' %>
             <%= link_to "😇 Saint #{deed.votes_for.down.where(vote_scope: nil).size}", downvote_deed_path(deed), data: { turbo_method: :post}, class: 'saint delete-link' %>
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <%= link_to '', deed_path(deed), class: "card-link" %>
   </div>
-
+  <%= link_to '', deed_path(deed), class: "card-link" %>
+</div>
 </div>

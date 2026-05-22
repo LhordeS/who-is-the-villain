@@ -39,7 +39,11 @@
         <i class="fa-regular fa-bell villain-bell"></i>
         <% if user_signed_in? %>
           <div class="dropdown">
-            <%= image_tag "skull-solid.png", alt: "icon of a skull", class: "villain-avatar dropdown-toggle", id: "navbarDropdown", 'data-bs-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false" %>
+            <% if current_user.avatar.attached? %>
+              <%= cl_image_tag current_user.avatar.key, alt: "avatar", class: "villain-avatar avatar-bordered dropdown-toggle", id: "navbarDropdown", 'data-bs-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false" %>
+            <% else %>
+              <%= image_tag "circle-user-regular.png", alt: "icon of a skull", class: "villain-avatar dropdown-toggle", id: "navbarDropdown", 'data-bs-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false" %>
+            <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Post", "/deeds/new", class: "dropdown-item" %>
               <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>

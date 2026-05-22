@@ -1,4 +1,7 @@
 # db/seeds.rb
+require 'open-uri'
+require 'nokogiri'
+
 user = User.find_or_create_by!(email: "test@example.com") do |u|
   u.password = "password123"
   u.password_confirmation = "password123"
@@ -34,3 +37,25 @@ Deed.create!([
     content: "A colleague I'm not close with was about to present to senior leadership. I noticed they had something in their teeth while we were waiting in the hallway. I didn't say anything because I wasn't sure how to bring it up without embarrassing them and we were about to walk in. The presentation happened, and they found out afterward. They were visibly mortified."
   }
 ])
+
+puts "Making 10 users..."
+10.times do
+  user = User.create!(
+    email: Faker::Internet.email,
+    password: 123123,
+    username: Faker::Internet.username,
+)
+  gender = 'all'
+  age = 'all'
+  ethnicity = 'all'
+
+  url = "https://this-person-does-not-exist.com/new?gender=#{gender}&age=#{age}&etnic=#{ethnicity}"
+  json = URI.open(url).string
+  src = JSON.parse(json)['src']
+  avatar_url = "https://this-person-does-not-exist.com#{src}"
+  file = URI.open(avatar_url)
+  user.avatar.attach(io: file, filename: 'user.png', content_type: 'image/png')
+
+end
+
+puts "done!"
