@@ -115,6 +115,7 @@ users = User.all
     title: DEED_TITLES.sample,
     content:  DEED_BODIES.sample,
     user:  users.sample,
+    public: true,
   )
 end
 
