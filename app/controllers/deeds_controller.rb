@@ -25,7 +25,7 @@ class DeedsController < ApplicationController
     @deed = Deed.new(deed_params)
     @deed.user = current_user
 
-    response = RubyLLM.chat
+    response = RubyLLM.chat(model: "gpt-4o")
                       .with_instructions(system_prompt)
                       .with_temperature(0.9)
                       .ask("Title: #{@deed.title}\nSituation: #{@deed.content}")
@@ -39,7 +39,7 @@ class DeedsController < ApplicationController
     @deed.summary = lines[2].split(": ", 2)[1].strip
 
     if @deed.save
-      @ruby_llm_chat = RubyLLM.chat
+      @ruby_llm_chat = RubyLLM.chat(model: "gpt-4o")
       response = @ruby_llm_chat.with_instructions(system_prompt).ask(@deed.content)
 
       # @assistant_message = @deed.messages.create(role: "assistant", content: response.content)
@@ -58,7 +58,10 @@ class DeedsController < ApplicationController
     else
       @deed.upvote_by current_user
     end
-    redirect_back fallback_location: deeds_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back_or_to deeds_path, status: :see_other }
+    end
   end
 
   def downvote
@@ -69,7 +72,10 @@ class DeedsController < ApplicationController
     else
       @deed.downvote_from current_user
     end
-    redirect_back fallback_location: deeds_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back_or_to deeds_path, status: :see_other }
+    end
   end
 
   def flag
@@ -81,7 +87,10 @@ class DeedsController < ApplicationController
     else
       @deed.liked_by current_user, vote_scope: 'flag'
     end
-    redirect_back fallback_location: deeds_path
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back_or_to deeds_path, status: :see_other }
+    end
   end
 
   def build_conversation_history

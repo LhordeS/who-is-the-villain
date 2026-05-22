@@ -6,12 +6,11 @@ class MessagesController < ApplicationController
 
     if @message.save
       llm_response = fetch_llm_response
-      parsed_response = JSON.parse(llm_response.content)
-      @deed.villain_score = parsed_response["score"]
+      @deed.villain_score = llm_response.content["score"]
       @deed.save
       @assistant_message = Message.create(
         role: "assistant",
-        content: parsed_response["messageContent"],
+        content: llm_response.content["messageContent"],
         deed: @deed
       )
 
@@ -27,9 +26,20 @@ class MessagesController < ApplicationController
   private
 
   def fetch_llm_response
-    ruby_llm_chat = RubyLLM.chat
-    ruby_llm_chat.with_instructions(system_prompt)
-    @deed.messages.each { |m| ruby_llm_chat.add_message(m) }
+    response_schema =
+      {
+        type: 'object',
+        properties: {
+          score: { type: 'integer' },
+          messageContent: { type: 'string' }
+        },
+        required: ['score', 'messageContent'],
+        additionalProperties: false # Required for OpenAI structured output
+      }
+
+    ruby_llm_chat = RubyLLM.chat(model: "gpt-4o")
+    ruby_llm_chat.with_instructions(system_prompt).with_schema(response_schema)
+    @deed.messages.each { |m| ruby_llm_chat.add_message(role: m.role.to_sym, content: m.content) }
     ruby_llm_chat.ask(@message.content)
   end
 

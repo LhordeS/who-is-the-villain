@@ -1,0 +1,5 @@
+<div class="d-flex" id="<%= dom_id(deed, :votes) %>">
+  <%= link_to "👹 Villain #{deed.votes_for.up.where(vote_scope: nil).size}", upvote_deed_path(deed), data: { turbo_method: :post}, class: 'villain delete-link' %>
+  <%= link_to "😇 Saint #{deed.votes_for.down.where(vote_scope: nil).size}", downvote_deed_path(deed), data: { turbo_method: :post}, class: 'saint delete-link' %>
+  <%= link_to "🤥 bs #{deed.get_upvotes(vote_scope: 'flag').size}", flag_deed_path(deed), data: { turbo_method: :post }, class: 'bs delete-link' %>
+</div>
