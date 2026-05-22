@@ -25,7 +25,7 @@ class DeedsController < ApplicationController
     @deed = Deed.new(deed_params)
     @deed.user = current_user
 
-    response = RubyLLM.chat
+    response = RubyLLM.chat(model: "gpt-4o")
                       .with_instructions(system_prompt)
                       .with_temperature(0.9)
                       .ask("Title: #{@deed.title}\nSituation: #{@deed.content}")
@@ -39,7 +39,7 @@ class DeedsController < ApplicationController
     @deed.summary = lines[2].split(": ", 2)[1].strip
 
     if @deed.save
-      @ruby_llm_chat = RubyLLM.chat
+      @ruby_llm_chat = RubyLLM.chat(model: "gpt-4o")
       response = @ruby_llm_chat.with_instructions(system_prompt).ask(@deed.content)
 
       # @assistant_message = @deed.messages.create(role: "assistant", content: response.content)
