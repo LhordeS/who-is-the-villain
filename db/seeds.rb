@@ -4,6 +4,7 @@ require 'nokogiri'
 
 Deed.destroy_all
 User.destroy_all
+
 user = User.find_or_create_by!(email: "test@example.com") do |u|
   u.password = "password123"
   u.password_confirmation = "password123"
@@ -115,7 +116,6 @@ users = User.all
     content:  DEED_BODIES.sample,
     user:  users.sample,
     public: true,
-
   )
 end
 
