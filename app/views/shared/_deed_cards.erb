@@ -16,7 +16,7 @@
             <% end %>
             <p class="card-text m-0"><%= deed.user.username %></p>
           </div>
-          <h5 class="card-title mt-2"><%= deed.title %></h5>
+          <h5 class="card-title mt-4"><%= deed.title %></h5>
           <p class="card-text mb-2"><%= deed.content %></p>
           <div class="d-flex" id="<%= dom_id(deed, :votes) %>">
             <%= link_to "👹 Villain #{deed.votes_for.up.where(vote_scope: nil).size}", upvote_deed_path(deed), data: { turbo_method: :post}, class: 'villain delete-link' %>
